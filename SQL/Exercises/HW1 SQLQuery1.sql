@@ -1,14 +1,14 @@
 use AdventureWorksDW2019;
 
 /*
-  Повернути всі записи з dbo.DimCustomer 
+  РџРѕРІРµСЂРЅСѓС‚Рё РІСЃС– Р·Р°РїРёСЃРё Р· dbo.DimCustomer 
 */
 select *
 from dbo.DimCustomer;
 
 /*
-  Витягнути Ім'я, 2 ім'я та прізвище клієнтів. З 2ого імені взяти лише 1у літеру і додати крапку.
-   FirstName, MiddleName, LastName з dbo.DimCustomer
+  Р’РёС‚СЏРіРЅСѓС‚Рё Р†Рј'СЏ, 2 С–Рј'СЏ С‚Р° РїСЂС–Р·РІРёС‰Рµ РєР»С–С”РЅС‚С–РІ. Р— 2РѕРіРѕ С–РјРµРЅС– РІР·СЏС‚Рё Р»РёС€Рµ 1Сѓ Р»С–С‚РµСЂСѓ С– РґРѕРґР°С‚Рё РєСЂР°РїРєСѓ.
+   FirstName, MiddleName, LastName Р· dbo.DimCustomer
 */
 select	FirstName,
 		case	when MiddleName is not null 
@@ -19,9 +19,9 @@ select	FirstName,
 from dbo.DimCustomer;
 
 /*
-  Витягнути Ім'я, 2 ім'я та прізвище клієнтів. З 2ого імені взяти лише 1у літеру і додати крапку.
-  Об'єднати ці атрибути і повернути FullName. Між атрибути має бути пробіл.
-   FirstName, MiddleName, LastName з dbo.DimCustomer
+  Р’РёС‚СЏРіРЅСѓС‚Рё Р†Рј'СЏ, 2 С–Рј'СЏ С‚Р° РїСЂС–Р·РІРёС‰Рµ РєР»С–С”РЅС‚С–РІ. Р— 2РѕРіРѕ С–РјРµРЅС– РІР·СЏС‚Рё Р»РёС€Рµ 1Сѓ Р»С–С‚РµСЂСѓ С– РґРѕРґР°С‚Рё РєСЂР°РїРєСѓ.
+  РћР±'С”РґРЅР°С‚Рё С†С– Р°С‚СЂРёР±СѓС‚Рё С– РїРѕРІРµСЂРЅСѓС‚Рё FullName. РњС–Р¶ Р°С‚СЂРёР±СѓС‚Рё РјР°С” Р±СѓС‚Рё РїСЂРѕР±С–Р».
+   FirstName, MiddleName, LastName Р· dbo.DimCustomer
 */
 select	FirstName,
 		case	when MiddleName is not null 
@@ -33,8 +33,8 @@ select	FirstName,
 from dbo.DimCustomer;
 				
 /*
-  Витягнути унікальні повні імена (Full Name) об'єднавши FirstName, MiddleName, LastName. З MiddleName взяти лише 1у літеру і додати крапку.
-  Відсортува по алфавіту
+  Р’РёС‚СЏРіРЅСѓС‚Рё СѓРЅС–РєР°Р»СЊРЅС– РїРѕРІРЅС– С–РјРµРЅР° (Full Name) РѕР±'С”РґРЅР°РІС€Рё FirstName, MiddleName, LastName. Р— MiddleName РІР·СЏС‚Рё Р»РёС€Рµ 1Сѓ Р»С–С‚РµСЂСѓ С– РґРѕРґР°С‚Рё РєСЂР°РїРєСѓ.
+  Р’С–РґСЃРѕСЂС‚СѓРІР° РїРѕ Р°Р»С„Р°РІС–С‚Сѓ
 */
 with cte as (
 select	distinct
@@ -51,42 +51,42 @@ from cte
 order by FullName;
 
 /*
-  Витягнути всі записи з інтернет продажів (dbo.FactProductInventory)
+  Р’РёС‚СЏРіРЅСѓС‚Рё РІСЃС– Р·Р°РїРёСЃРё Р· С–РЅС‚РµСЂРЅРµС‚ РїСЂРѕРґР°Р¶С–РІ (dbo.FactProductInventory)
 */
 select *
 from dbo.FactProductInventory;
 
 /*
-  Дата останньої зміни (LastChanheDate) в dbo.FactProductInventory для продукта 606 (WHERE ProductKey = 606).
-  На основі колонки MovementDate
+  Р”Р°С‚Р° РѕСЃС‚Р°РЅРЅСЊРѕС— Р·РјС–РЅРё (LastChanheDate) РІ dbo.FactProductInventory РґР»СЏ РїСЂРѕРґСѓРєС‚Р° 606 (WHERE ProductKey = 606).
+  РќР° РѕСЃРЅРѕРІС– РєРѕР»РѕРЅРєРё MovementDate
 */
 select max(MovementDate) as LastChangedDate
 from dbo.FactProductInventory
 where ProductKey = 606;
 
 /*
-  Унікальні групи територій продажів SalesTerritoryGroup з DimSalesTerritory
+  РЈРЅС–РєР°Р»СЊРЅС– РіСЂСѓРїРё С‚РµСЂРёС‚РѕСЂС–Р№ РїСЂРѕРґР°Р¶С–РІ SalesTerritoryGroup Р· DimSalesTerritory
 */
 select distinct SalesTerritoryGroup
 from dbo.DimSalesTerritory;
 
 /*
-  Отримати перші 5 записів по даті з FactCurrencyRate
+  РћС‚СЂРёРјР°С‚Рё РїРµСЂС€С– 5 Р·Р°РїРёСЃС–РІ РїРѕ РґР°С‚С– Р· FactCurrencyRate
 */
 select top 5 *
 from FactCurrencyRate
 order by "Date" desc;
 
 /*
-  Отримати останні 5 записів по даті з FactCurrencyRate
+  РћС‚СЂРёРјР°С‚Рё РѕСЃС‚Р°РЅРЅС– 5 Р·Р°РїРёСЃС–РІ РїРѕ РґР°С‚С– Р· FactCurrencyRate
 */
 select top 5 *
 from FactCurrencyRate
 order by "Date" asc;
 
 /*
-  Знайти найдорожчий(-і) продукт(-и) за всю історію,
-    повернути колонки ProdcutKey та UnitCost з FactProductInventory.
+  Р—РЅР°Р№С‚Рё РЅР°Р№РґРѕСЂРѕР¶С‡РёР№(-С–) РїСЂРѕРґСѓРєС‚(-Рё) Р·Р° РІСЃСЋ С–СЃС‚РѕСЂС–СЋ,
+    РїРѕРІРµСЂРЅСѓС‚Рё РєРѕР»РѕРЅРєРё ProdcutKey С‚Р° UnitCost Р· FactProductInventory.
 */
 select ProductKey, UnitCost
 from dbo.FactProductInventory
@@ -94,7 +94,7 @@ where UnitCost = (	select max(UnitCost)
 					from dbo.FactProductInventory );
 
 /*
-  Знайти найдешевщий(-і) продукт(-и) за всю історію, повернути всі колонки з FactProductInventory
+  Р—РЅР°Р№С‚Рё РЅР°Р№РґРµС€РµРІС‰РёР№(-С–) РїСЂРѕРґСѓРєС‚(-Рё) Р·Р° РІСЃСЋ С–СЃС‚РѕСЂС–СЋ, РїРѕРІРµСЂРЅСѓС‚Рё РІСЃС– РєРѕР»РѕРЅРєРё Р· FactProductInventory
 */
 select *
 from dbo.FactProductInventory
@@ -102,26 +102,26 @@ where UnitCost = (	select min(UnitCost)
 					from dbo.FactProductInventory );
 
 /*
-  Зробити перевірку даних,
-  прокалькулювавши загальну суму лінійки замовлення,
-  помноживши кількість замовленого товару на ціну товару відмінусувавши SalesAmount з урахуванням знижки.
-  Повернути 1ий рядок посортований по цьому виразу по спаданню.
-  Якщо повернутий результат - 0 то все правильно
+  Р—СЂРѕР±РёС‚Рё РїРµСЂРµРІС–СЂРєСѓ РґР°РЅРёС…,
+  РїСЂРѕРєР°Р»СЊРєСѓР»СЋРІР°РІС€Рё Р·Р°РіР°Р»СЊРЅСѓ СЃСѓРјСѓ Р»С–РЅС–Р№РєРё Р·Р°РјРѕРІР»РµРЅРЅСЏ,
+  РїРѕРјРЅРѕР¶РёРІС€Рё РєС–Р»СЊРєС–СЃС‚СЊ Р·Р°РјРѕРІР»РµРЅРѕРіРѕ С‚РѕРІР°СЂСѓ РЅР° С†С–РЅСѓ С‚РѕРІР°СЂСѓ РІС–РґРјС–РЅСѓСЃСѓРІР°РІС€Рё SalesAmount Р· СѓСЂР°С…СѓРІР°РЅРЅСЏРј Р·РЅРёР¶РєРё.
+  РџРѕРІРµСЂРЅСѓС‚Рё 1РёР№ СЂСЏРґРѕРє РїРѕСЃРѕСЂС‚РѕРІР°РЅРёР№ РїРѕ С†СЊРѕРјСѓ РІРёСЂР°Р·Сѓ РїРѕ СЃРїР°РґР°РЅРЅСЋ.
+  РЇРєС‰Рѕ РїРѕРІРµСЂРЅСѓС‚РёР№ СЂРµР·СѓР»СЊС‚Р°С‚ - 0 С‚Рѕ РІСЃРµ РїСЂР°РІРёР»СЊРЅРѕ
 */
 
--- для FactInternetSales
+-- РґР»СЏ FactInternetSales
 select (OrderQuantity *  UnitPrice - DiscountAmount - SalesAmount ) as DataCheck
 from dbo.FactInternetSales
 order by DataCheck desc;
 
--- для FactInternetSales
+-- РґР»СЏ FactInternetSales
 select (OrderQuantity * UnitPrice - DiscountAmount - SalesAmount ) as DataCheck, *
 from dbo.FactInternetSales
 order by DataCheck desc;
 
 /*
-  Вирахувати кількість повних років від час найму до зараз.
-  Повернути Ім'я, прізвище, кількість років (YearsEmployed) з таблички 
+  Р’РёСЂР°С…СѓРІР°С‚Рё РєС–Р»СЊРєС–СЃС‚СЊ РїРѕРІРЅРёС… СЂРѕРєС–РІ РІС–Рґ С‡Р°СЃ РЅР°Р№РјСѓ РґРѕ Р·Р°СЂР°Р·.
+  РџРѕРІРµСЂРЅСѓС‚Рё Р†Рј'СЏ, РїСЂС–Р·РІРёС‰Рµ, РєС–Р»СЊРєС–СЃС‚СЊ СЂРѕРєС–РІ (YearsEmployed) Р· С‚Р°Р±Р»РёС‡РєРё 
 */
 select  FirstName,
 		LastName, 
@@ -130,9 +130,9 @@ from dbo.DimEmployee
 where "Status" = 'Current';
 
 /*
-  Повернути всі дні із найбльшою кількістю прийнятих скарг у кол-центр.
-  З FactCallCenter, результат з колонки Date повернути у форматі: 12 Nov 21;
-    а також повернути назву дня.
+  РџРѕРІРµСЂРЅСѓС‚Рё РІСЃС– РґРЅС– С–Р· РЅР°Р№Р±Р»СЊС€РѕСЋ РєС–Р»СЊРєС–СЃС‚СЋ РїСЂРёР№РЅСЏС‚РёС… СЃРєР°СЂРі Сѓ РєРѕР»-С†РµРЅС‚СЂ.
+  Р— FactCallCenter, СЂРµР·СѓР»СЊС‚Р°С‚ Р· РєРѕР»РѕРЅРєРё Date РїРѕРІРµСЂРЅСѓС‚Рё Сѓ С„РѕСЂРјР°С‚С–: 12 Nov 21;
+    Р° С‚Р°РєРѕР¶ РїРѕРІРµСЂРЅСѓС‚Рё РЅР°Р·РІСѓ РґРЅСЏ.
 */
 select  datename(weekday, "Date"),
 		format("Date", 'dd MMM yyyy'),
@@ -141,8 +141,8 @@ from dbo.FactCallCenter
 order by Calls desc;
 
 /* 
-  Витягнути всі дані для 3ї сторінки, які приходять з сутності DimReseller,
-  якщо вибране сортування по року першого замовлення, назві реселера, а розмір сторінки 15
+  Р’РёС‚СЏРіРЅСѓС‚Рё РІСЃС– РґР°РЅС– РґР»СЏ 3С— СЃС‚РѕСЂС–РЅРєРё, СЏРєС– РїСЂРёС…РѕРґСЏС‚СЊ Р· СЃСѓС‚РЅРѕСЃС‚С– DimReseller,
+  СЏРєС‰Рѕ РІРёР±СЂР°РЅРµ СЃРѕСЂС‚СѓРІР°РЅРЅСЏ РїРѕ СЂРѕРєСѓ РїРµСЂС€РѕРіРѕ Р·Р°РјРѕРІР»РµРЅРЅСЏ, РЅР°Р·РІС– СЂРµСЃРµР»РµСЂР°, Р° СЂРѕР·РјС–СЂ СЃС‚РѕСЂС–РЅРєРё 15
 */
 select *
 from dbo.DimReseller
