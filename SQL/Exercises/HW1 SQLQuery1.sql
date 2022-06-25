@@ -1,7 +1,7 @@
 use AdventureWorksDW2019;
 
 /*
-  Повернути всі записи з dbo.DimCustomer
+  Повернути всі записи з dbo.DimCustomer 
 */
 select *
 from dbo.DimCustomer;
